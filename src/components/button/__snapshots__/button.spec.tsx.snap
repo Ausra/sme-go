@@ -14,6 +14,6 @@ exports[`button primary 1`] = `
 
 <button
   class="c0"
-  data-hook="styled-button"
+  data-testid="styled-button"
 />
 `;

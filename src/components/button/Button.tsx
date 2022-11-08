@@ -3,12 +3,12 @@ import styled from "styled-components/macro";
 import { defaultTheme } from "../../utils/global-styles";
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
-  dataHook?: string;
+  dataTestId?: string;
   title?: string;
   primary?: boolean;
 }
 
-export const defaultHook = "styled-button";
+export const defaultTestId = "styled-button";
 
 const StyledButton = styled.button<{
   primary?: boolean | undefined;
@@ -34,14 +34,14 @@ const Button: FunctionComponent<ButtonProps> = ({
   title,
   primary,
   onClick,
-  dataHook,
+  dataTestId,
 }) => {
   return (
     <>
       <StyledButton
         primary={primary}
         onClick={onClick}
-        data-hook={defaultHook || dataHook}
+        data-testid={defaultTestId || dataTestId}
       >
         {title}
       </StyledButton>
