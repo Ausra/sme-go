@@ -12,9 +12,12 @@ export const defaultTheme = {
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,
   textColor: neutral[700],
+  input: {
+    defaultBackgroundColor: neutral[100],
+    borderColor: neutral[500],
+    backgroundColor: neutral[300],
+  },
   status: {
     errorColor: red[100],
   },
-
-  borderColor: neutral[500],
 };
