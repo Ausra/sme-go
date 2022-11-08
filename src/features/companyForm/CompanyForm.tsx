@@ -6,6 +6,7 @@ import { companyAsync, selectCount, clickNext } from "./companyFormSlice";
 import Button from "../../components/button";
 import Card from "../../components/card/Card";
 import Input from "../../components/input";
+import Stepper from "../../components/Stepper";
 
 export function CompanyForm() {
   const count = useAppSelector(selectCount);
@@ -30,6 +31,7 @@ export function CompanyForm() {
       <span>{count}</span>
       <Input label="label" type="text" />
       <Card title="Company" />
+      <Stepper steps={[{ title: "step" }, { title: "step1" }]} />
     </div>
   );
 }
