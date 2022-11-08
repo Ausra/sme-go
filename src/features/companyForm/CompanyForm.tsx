@@ -5,6 +5,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { companyAsync, selectCount, clickNext } from "./companyFormSlice";
 import Button from "../../components/button";
 import Card from "../../components/card/Card";
+import Input from "../../components/input";
 
 export function CompanyForm() {
   const count = useAppSelector(selectCount);
@@ -27,6 +28,7 @@ export function CompanyForm() {
         title="Next"
       />
       <span>{count}</span>
+      <Input label="label" type="text" />
       <Card title="Company" />
     </div>
   );
