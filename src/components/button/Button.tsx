@@ -8,13 +8,15 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   primary?: boolean;
 }
 
+export const defaultHook = "styled-button";
+
 const StyledButton = styled.button<{
   primary?: boolean | undefined;
 }>`
   border-radius: 24px;
   border: 1px solid ${defaultTheme.button.primaryColor};
   color: white;
-  margin: 0.5em 1em;
+  margin: 8px 16px;
   padding: 12px 24px;
 
   background: ${(props) =>
@@ -31,10 +33,15 @@ const Button: FunctionComponent<ButtonProps> = ({
   title,
   primary,
   onClick,
+  dataHook,
 }) => {
   return (
     <>
-      <StyledButton primary={primary} onClick={onClick}>
+      <StyledButton
+        primary={primary}
+        onClick={onClick}
+        data-hook={defaultHook || dataHook}
+      >
         {title}
       </StyledButton>
     </>
