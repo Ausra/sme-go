@@ -1,10 +1,11 @@
 import CompanyForm from "./features/companyForm";
-
+import { GlobalStyle } from "./utils/global-styles";
 
 function App() {
   return (
     <div className="App">
-    <CompanyForm />
+      <GlobalStyle />
+      <CompanyForm />
     </div>
   );
 }

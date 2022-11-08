@@ -18,6 +18,7 @@ const StyledButton = styled.button<{
   color: white;
   margin: 8px 16px;
   padding: 12px 24px;
+  height: 42px;
 
   background: ${(props) =>
     props.primary

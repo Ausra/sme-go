@@ -7,6 +7,7 @@ exports[`button primary 1`] = `
   color: white;
   margin: 8px 16px;
   padding: 12px 24px;
+  height: 42px;
   background: #2B64F5;
   color: #ffffff;
 }
