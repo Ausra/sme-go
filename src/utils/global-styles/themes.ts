@@ -11,7 +11,7 @@ export const defaultTheme = {
   cardBackground: neutral[100],
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,
-  textColor: neutral[600],
+  textColor: neutral[700],
   status: {
     errorColor: red[100],
   },
