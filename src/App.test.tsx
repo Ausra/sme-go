@@ -4,12 +4,12 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import App from "./App";
 
-test("renders Submit Form button", () => {
+test("renders Next button", () => {
   render(
     <Provider store={store}>
       <App />
     </Provider>
   );
 
-  expect(screen.getByText(/Submit Form/i)).toBeInTheDocument();
+  expect(screen.getByText(/Next/i)).toBeInTheDocument();
 });
