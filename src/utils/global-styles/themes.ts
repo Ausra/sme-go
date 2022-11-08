@@ -8,7 +8,10 @@ export const defaultTheme = {
     secondaryColor: neutral[100],
     secondaryTextColor: blue[100],
   },
+  cardBackground: neutral[100],
+  bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,
+  textColor: neutral[700],
   status: {
     errorColor: red[100],
   },

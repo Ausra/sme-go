@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { primaryFont } from "./typography";
+import { defaultTheme } from "./themes";
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -12,6 +13,7 @@ export const GlobalStyle = createGlobalStyle`
     body {
       margin: 0;
       padding: 65px 0 0;
+      background-color: ${defaultTheme.bodyBackgroundColor};
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
