@@ -1,8 +1,4 @@
 import React from "react";
-
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { companyAsync, selectCount, clickNext } from "./companyFormSlice";
 import Card from "../../components/card/Card";
 import Input from "../../components/input";
 import Stepper from "../../components/stepper";
@@ -11,9 +7,6 @@ import style from "./companyForm.module.scss";
 import Button from "../../components/button";
 
 export function CompanyForm() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
-
   return (
     <div className={style.container}>
       <div className={style.contentContainer}>
