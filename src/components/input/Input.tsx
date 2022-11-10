@@ -14,8 +14,8 @@ const defaultTestId = "styled-input-container";
 
 const Container = styled.div`
   position: relative;
-  width: 575px;
   height: 60px;
+  margin: 6px 0;
 `;
 
 const StyledInput = styled.input`

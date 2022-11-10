@@ -6,7 +6,7 @@ import { defaultTheme } from "../../utils/global-styles";
 
 interface CardProps {
   dataTestId?: string;
-  children?: ReactElement;
+  children?: ReactElement[] | ReactElement;
   title?: string;
 }
 
@@ -19,13 +19,13 @@ const Container = styled.div`
   min-height: 400px;
   border-radius: 24px;
   background-color: ${defaultTheme.cardBackground};
-  margin: 24px;
   padding: 24px 24px;
 `;
 const ContentLayout = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 300px;
+  padding: 0 24px;
 `;
 
 const Card: FunctionComponent<CardProps> = ({

@@ -6,17 +6,19 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   dataTestId?: string;
   title?: string;
   primary?: boolean;
+  margin?: string;
 }
 
 export const defaultTestId = "styled-button";
 
 const StyledButton = styled.button<{
   primary?: boolean | undefined;
+  margin?: string;
 }>`
   border-radius: 24px;
   border: 1px solid ${defaultTheme.button.primaryColor};
   color: white;
-  margin: 8px 16px;
+  margin: ${(props) => (props.margin ? props.margin : `8px 16px`)};
   padding: 12px 24px;
   height: 42px;
 
@@ -35,6 +37,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   primary,
   onClick,
   dataTestId,
+  margin,
 }) => {
   return (
     <>
@@ -42,6 +45,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         primary={primary}
         onClick={onClick}
         data-testid={defaultTestId || dataTestId}
+        margin={margin}
       >
         {title}
       </StyledButton>
