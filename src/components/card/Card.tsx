@@ -8,6 +8,8 @@ interface CardProps {
   dataTestId?: string;
   children?: ReactElement[] | ReactElement;
   title?: string;
+  handleNextClick?: () => void;
+  handleBackClick?: () => void;
 }
 
 export const defaultTestId = "styled-card-container";
@@ -32,12 +34,17 @@ const Card: FunctionComponent<CardProps> = ({
   dataTestId,
   children,
   title,
+  handleNextClick,
+  handleBackClick,
 }) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
       <Header title={title} />
       <ContentLayout>{children}</ContentLayout>
-      <Footer />
+      <Footer
+        handleNextClick={handleNextClick}
+        handleBackClick={handleBackClick}
+      />
     </Container>
   );
 };

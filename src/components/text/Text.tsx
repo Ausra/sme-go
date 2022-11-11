@@ -6,7 +6,7 @@ type TextSize = "small" | "medium" | "large";
 
 interface TextProps {
   dataTestId?: string;
-  children?: string;
+  children?: string | number;
   size?: TextSize;
   color?: string;
 }
@@ -17,6 +17,7 @@ const StyledText = styled.p<{ size?: TextSize; color?: string }>`
   font-size: ${(props) =>
     props.size ? typeScale[props.size] : typeScale.medium};
   color: ${(props) => (props.color ? props.color : defaultTheme.textColor)};
+  pointer-events: none;
 `;
 
 const Text: FunctionComponent<TextProps> = ({

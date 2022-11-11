@@ -5,6 +5,8 @@ import styled from "styled-components/macro";
 export interface FooterProps {
   dataTestId?: string;
   children?: string;
+  handleNextClick?: () => void;
+  handleBackClick?: () => void;
 }
 
 const Container = styled.div`
@@ -16,11 +18,16 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Footer: FunctionComponent<FooterProps> = ({ dataTestId, children }) => {
+const Footer: FunctionComponent<FooterProps> = ({
+  dataTestId,
+  children,
+  handleNextClick,
+  handleBackClick,
+}) => {
   return (
     <Container>
-      <Button title="Back" />
-      <Button title="Next" primary />
+      <Button title="Back" onClick={handleBackClick} />
+      <Button title="Next" primary onClick={handleNextClick} />
     </Container>
   );
 };

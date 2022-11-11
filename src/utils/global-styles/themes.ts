@@ -9,6 +9,11 @@ export const defaultTheme = {
     secondaryColor: neutral[100],
     secondaryTextColor: blue[100],
   },
+  step: {
+    activeColor: blue[100],
+    inactiveColor: neutral[600],
+    disabledColor: neutral[400],
+  },
   cardBackground: neutral[100],
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,

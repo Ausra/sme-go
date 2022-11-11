@@ -4,6 +4,7 @@ exports[`should render default Text 1`] = `
 .c0 {
   font-size: 1rem;
   color: #000000;
+  pointer-events: none;
 }
 
 <p
