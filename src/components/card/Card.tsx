@@ -10,6 +10,7 @@ interface CardProps {
   title?: string;
   handleNextClick?: () => void;
   handleBackClick?: () => void;
+  primaryButtonType?: "button" | "submit";
 }
 
 export const defaultTestId = "styled-card-container";
@@ -36,12 +37,14 @@ const Card: FunctionComponent<CardProps> = ({
   title,
   handleNextClick,
   handleBackClick,
+  primaryButtonType,
 }) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
       <Header title={title} />
       <ContentLayout>{children}</ContentLayout>
       <Footer
+        primaryButtonType={primaryButtonType}
         handleNextClick={handleNextClick}
         handleBackClick={handleBackClick}
       />

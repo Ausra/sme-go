@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import Card from "../../../components/card";
-import Input from "../../../components/input";
+import InputField from "../../../components/inputField";
+import { COMPANY } from "./company.validation";
 
 interface CompanyProps {
   dataTestId?: string;
@@ -20,9 +21,9 @@ const Company: FunctionComponent<CompanyProps> = ({
         handleNextClick={handleNextClick}
         handleBackClick={handleBackClick}
       >
-        <Input label="Company code" />
-        <Input label="Company name" />
-        <Input label="Country of registration" />
+        <InputField name={COMPANY.CODE} label="Company code" />
+        <InputField name={COMPANY.NAME} label="Company name" />
+        <InputField name={COMPANY.COUNTRY} label="Country of registration" />
       </Card>
     </>
   );

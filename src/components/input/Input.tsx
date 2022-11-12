@@ -2,12 +2,16 @@ import { FunctionComponent } from "react";
 import styled from "styled-components/macro";
 import { defaultTheme } from "../../utils/global-styles";
 
-interface InputProps {
+export interface InputProps extends React.HTMLAttributes<HTMLElement> {
   dataTestId?: string;
   label?: string;
   placeholder?: string;
   type?: string;
   inputText?: string;
+  name?: string;
+  status?: string;
+  statusMessage?: string;
+  value?: string | number;
 }
 
 const defaultTestId = "styled-input-container";
@@ -44,10 +48,21 @@ const StyledLabel = styled.label`
   }
 `;
 
-const Input: FunctionComponent<InputProps> = ({ dataTestId, label, type }) => {
+const Input: FunctionComponent<InputProps> = ({
+  dataTestId,
+  label,
+  type,
+  onChange,
+  name,
+}) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
-      <StyledInput id="inputField" type={type} />
+      <StyledInput
+        id="inputField"
+        type={type}
+        onChange={onChange}
+        name={name}
+      />
       <StyledLabel htmlFor="inputField">{label}</StyledLabel>
     </Container>
   );

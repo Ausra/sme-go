@@ -7,6 +7,7 @@ export interface FooterProps {
   children?: string;
   handleNextClick?: () => void;
   handleBackClick?: () => void;
+  primaryButtonType?: "button" | "submit";
 }
 
 const Container = styled.div`
@@ -23,11 +24,17 @@ const Footer: FunctionComponent<FooterProps> = ({
   children,
   handleNextClick,
   handleBackClick,
+  primaryButtonType,
 }) => {
   return (
     <Container>
       <Button title="Back" onClick={handleBackClick} />
-      <Button title="Next" primary onClick={handleNextClick} />
+      <Button
+        title="Next"
+        primary
+        onClick={handleNextClick}
+        type={primaryButtonType}
+      />
     </Container>
   );
 };

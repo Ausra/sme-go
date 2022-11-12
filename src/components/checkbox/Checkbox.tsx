@@ -1,13 +1,12 @@
 import { FunctionComponent, ReactElement } from "react";
 import styled from "styled-components/macro";
-import Text from "../text";
 
-interface CheckboxProps {
+export interface CheckboxProps {
   dataTestId?: string;
   children: string | ReactElement[];
   id: string;
-  checked: boolean;
-  handleOnChange: (e: any) => void;
+  checked?: boolean;
+  onChange: (e: any) => void;
 }
 
 const StyledCheckboxInput = styled.input``;
@@ -17,7 +16,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
   children,
   id,
   checked,
-  handleOnChange,
+  onChange,
 }) => {
   return (
     <>
@@ -25,7 +24,7 @@ const Checkbox: FunctionComponent<CheckboxProps> = ({
         type="checkbox"
         id={id}
         checked={checked}
-        onChange={handleOnChange}
+        onChange={onChange}
       />
       <StyledLabel htmlFor={id}>{children}</StyledLabel>
     </>

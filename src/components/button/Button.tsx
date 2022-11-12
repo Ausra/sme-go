@@ -7,6 +7,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   title?: string;
   primary?: boolean;
   margin?: string;
+  type?: "button" | "submit";
 }
 
 export const defaultTestId = "styled-button";
@@ -38,11 +39,13 @@ const Button: FunctionComponent<ButtonProps> = ({
   onClick,
   dataTestId,
   margin,
+  type,
 }) => {
   return (
     <>
       <StyledButton
         primary={primary}
+        type={type}
         onClick={onClick}
         data-testid={defaultTestId || dataTestId}
         margin={margin}
