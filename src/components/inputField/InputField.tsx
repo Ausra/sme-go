@@ -9,7 +9,7 @@ interface InputFieldProps extends InputProps {
 
 const InputField: FunctionComponent<InputFieldProps> = ({ name, label }) => {
   const [field, meta] = useField(name);
-  console.log(name);
+
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     field.onChange(event);
   };

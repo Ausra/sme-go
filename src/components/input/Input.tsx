@@ -53,7 +53,9 @@ const Input: FunctionComponent<InputProps> = ({
   label,
   type,
   onChange,
+  onClick,
   name,
+  value,
 }) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
@@ -61,7 +63,9 @@ const Input: FunctionComponent<InputProps> = ({
         id="inputField"
         type={type}
         onChange={onChange}
+        onClick={onClick}
         name={name}
+        value={value}
       />
       <StyledLabel htmlFor="inputField">{label}</StyledLabel>
     </Container>
