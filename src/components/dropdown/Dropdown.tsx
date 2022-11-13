@@ -6,7 +6,7 @@ import {
   StyledListItem,
 } from "./styles";
 
-interface DropdownOption {
+export interface DropdownOption {
   value: string;
   id: string;
 }
@@ -15,7 +15,7 @@ interface DropdownProps extends InputProps {
   dataTestId?: string;
   options: DropdownOption[];
   label: string;
-  onSelectCallback?: (id: string, country: string) => void;
+  onSelectCallback?: (value: string) => void;
 }
 
 export const defaultTestId = "styled-dropdown";
@@ -42,7 +42,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
 
   const handleSelect = (id: any, country: any) => {
     setSelected(country);
-    onSelectCallback && onSelectCallback(id, country);
+    onSelectCallback && onSelectCallback(country);
     setOpen(false);
   };
 

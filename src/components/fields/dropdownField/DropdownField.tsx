@@ -1,12 +1,13 @@
 import { useField } from "formik";
 import { FunctionComponent } from "react";
 import Dropdown from "../../dropdown";
+import { DropdownOption } from "../../dropdown/Dropdown";
 import { InputStatus } from "../../input";
 
 interface DropdownFieldProps {
   dataTestId?: string;
   label: string;
-  options: { country: string; id: string }[];
+  options: DropdownOption[];
   name: string;
 }
 
@@ -17,9 +18,8 @@ const DropdownField: FunctionComponent<DropdownFieldProps> = ({
 }) => {
   const [field, meta, { setValue }] = useField(name);
 
-  const handleOnSelect = (id: string, country: string) => {
-    console.log(country);
-    setValue(country);
+  const handleOnSelect = (value: string) => {
+    setValue(value);
   };
   return (
     <>
