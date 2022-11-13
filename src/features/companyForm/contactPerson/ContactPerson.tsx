@@ -2,10 +2,10 @@ import { FunctionComponent, useState } from "react";
 import Card from "../../../components/card";
 
 import Input from "../../../components/input";
-import InputField from "../../../components/inputField";
+import InputField from "../../../components/fields/inputField";
 import Text from "../../../components/text";
 import TextButton from "../../../components/textButton";
-import CheckboxField from "../../../components/checkboxField/CheckboxField";
+import CheckboxField from "../../../components/fields/checkboxField/CheckboxField";
 import { CONTACT_PERSON } from "./contactPerson.validation";
 
 interface ContactPersonProps {

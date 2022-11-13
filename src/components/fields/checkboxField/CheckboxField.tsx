@@ -1,6 +1,6 @@
 import { useField } from "formik";
 import { FunctionComponent } from "react";
-import Checkbox, { CheckboxProps } from "../checkbox";
+import Checkbox, { CheckboxProps } from "../../checkbox";
 
 interface CheckboxFieldProps extends CheckboxProps {
   name: string;

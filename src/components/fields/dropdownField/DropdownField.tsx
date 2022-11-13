@@ -1,7 +1,7 @@
 import { useField } from "formik";
 import { FunctionComponent } from "react";
-import Dropdown from "../dropdown";
-import { InputStatus } from "../input";
+import Dropdown from "../../dropdown";
+import { InputStatus } from "../../input";
 
 interface DropdownFieldProps {
   dataTestId?: string;

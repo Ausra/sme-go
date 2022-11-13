@@ -1,7 +1,7 @@
 import { FunctionComponent } from "react";
 import Card from "../../../components/card";
-import DropdownField from "../../../components/dropdownField";
-import InputField from "../../../components/inputField";
+import DropdownField from "../../../components/fields/dropdownField";
+import InputField from "../../../components/fields/inputField";
 import { COMPANY } from "./company.validation";
 
 interface CompanyProps {
