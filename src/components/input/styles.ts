@@ -30,6 +30,7 @@ export const StyledInput = styled.input<{
   ::placeholder {
     color: transparent;
   }
+  :not(:placeholder-shown),
   :focus {
     background-color: ${defaultTheme.input.backgroundColor};
   }

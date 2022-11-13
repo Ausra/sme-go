@@ -15,6 +15,11 @@ export const defaultTheme = {
     inactiveColor: neutral[600],
     disabledColor: neutral[400],
   },
+  dropdown: {
+    backgroundColor: neutral[100],
+    borderColor: neutral[500],
+    textColor: neutral[700],
+  },
   cardBackground: neutral[100],
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,

@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import Input, { InputProps } from "../input";
 import styled from "styled-components/macro";
+import { defaultTheme, typeScale } from "../../utils/global-styles";
 
 interface DropdownProps extends InputProps {
   dataTestId?: string;
@@ -11,24 +12,35 @@ interface DropdownProps extends InputProps {
 
 const Container = styled.div``;
 
-const DropDownList = styled.ul`
+const DropDownListContainer = styled.ul`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: 0;
   margin: 0;
-  padding-left: 1em;
-  background: #ffffff;
-  border: 2px solid #e5e5e5;
+  position: relative;
+  top: -66px;
+  min-height: 120px;
+  padding-left: 16px;
+  background: ${defaultTheme.dropdown.backgroundColor};
+  border: 1px solid ${defaultTheme.dropdown.borderColor};
+  border-radius: 8px;
   box-sizing: border-box;
-  color: #3faffa;
-  font-size: 1.3rem;
-  font-weight: 500;
+  color: ${defaultTheme.dropdown.textColor};
+  font-size: ${typeScale.medium};
   &:first-child {
-    padding-top: 0.8em;
+    padding-top: 8px;
   }
 `;
 
-const ListItem = styled.li`
+const StyledListItem = styled.li`
   list-style: none;
-  margin-bottom: 0.8em;
+  margin-bottom: 8px;
+`;
+
+const StyledListButton = styled.button`
+  background: none;
+  border: none;
 `;
 
 export const defaultTestId = "styled-dropdown";
@@ -44,21 +56,19 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   onSelectCallback,
 }) => {
   const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState(options[0].country);
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
   const handleSelect = (id: any, country: any) => {
-    console.log(id, country);
     setSelected(country);
     onSelectCallback && onSelectCallback(id, country);
     setOpen(false);
   };
 
   const handleOnChange = (e: any) => {
-    console.log(e);
     setSelected(e.target.value);
   };
 
@@ -67,22 +77,24 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
       <Input
         name={name}
         label={label}
-        onClick={handleOpen}
+        onClickCallback={handleOpen}
         customValue={customValue || selected}
-        onChange={handleOnChange}
+        onChangeCallback={handleOnChange}
         status={status}
         statusMessage={statusMessage}
       />
       {open ? (
-        <DropDownList>
+        <DropDownListContainer>
           {options.map((option, index) => (
-            <ListItem key={index}>
-              <button onClick={() => handleSelect(option.id, option.country)}>
+            <StyledListItem key={index}>
+              <StyledListButton
+                onClick={() => handleSelect(option.id, option.country)}
+              >
                 {option.country}
-              </button>
-            </ListItem>
+              </StyledListButton>
+            </StyledListItem>
           ))}
-        </DropDownList>
+        </DropDownListContainer>
       ) : null}
     </Container>
   );
