@@ -1,6 +1,6 @@
 import { useField } from "formik";
 import { FunctionComponent } from "react";
-import Input, { InputProps } from "../input";
+import Input, { InputProps, InputStatus } from "../input";
 
 interface InputFieldProps extends InputProps {
   dataTestId?: string;
@@ -23,9 +23,9 @@ const InputField: FunctionComponent<InputFieldProps> = ({
     <>
       <Input
         name={name}
-        status={meta.touched && meta.error ? "error" : undefined}
+        status={meta.touched && meta.error ? InputStatus.error : undefined}
         statusMessage={meta.touched && meta.error ? meta.error : undefined}
-        value={field.value}
+        customValue={field.value}
         label={label}
         onChange={handleOnChange}
         onBlur={handleBlur}

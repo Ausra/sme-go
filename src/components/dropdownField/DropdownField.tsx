@@ -1,6 +1,7 @@
 import { useField } from "formik";
 import { FunctionComponent } from "react";
 import Dropdown from "../dropdown";
+import { InputStatus } from "../input";
 
 interface DropdownFieldProps {
   dataTestId?: string;
@@ -26,9 +27,9 @@ const DropdownField: FunctionComponent<DropdownFieldProps> = ({
         name={name}
         label={label}
         options={options}
-        status={meta.touched && meta.error ? "error" : undefined}
+        status={meta.touched && meta.error ? InputStatus.error : undefined}
         statusMessage={meta.touched && meta.error ? meta.error : undefined}
-        value={field.value}
+        customValue={field.value}
         onSelectCallback={handleOnSelect}
       />
     </>

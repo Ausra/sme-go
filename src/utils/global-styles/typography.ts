@@ -1,7 +1,7 @@
-export const primaryFont = '"Inter", monospace';
+export const primaryFont = '"Inter", sans-serif';
 
 export const typeScale = {
-  medium: "1rem",
-  small: "0.8rem",
-  large: "1.2rem",
+  medium: "16px",
+  small: "12px",
+  large: "24px",
 };

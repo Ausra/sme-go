@@ -9,7 +9,10 @@ export const COMPANY = {
 const COMPANY_CODE_MAX_LENGTH = 10;
 
 export const companyValidationSchema = object().shape({
-  [COMPANY.CODE]: string().max(COMPANY_CODE_MAX_LENGTH),
+  [COMPANY.CODE]: string().max(
+    COMPANY_CODE_MAX_LENGTH,
+    `Company code must be ${COMPANY_CODE_MAX_LENGTH} characters or less`
+  ),
   [COMPANY.NAME]: string(),
   [COMPANY.COUNTRY]: string(),
 });

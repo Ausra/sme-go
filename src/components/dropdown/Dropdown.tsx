@@ -40,7 +40,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   name,
   status,
   statusMessage,
-  value,
+  customValue,
   onSelectCallback,
 }) => {
   const [open, setOpen] = useState(false);
@@ -68,7 +68,7 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
         name={name}
         label={label}
         onClick={handleOpen}
-        value={value || selected}
+        customValue={customValue || selected}
         onChange={handleOnChange}
         status={status}
         statusMessage={statusMessage}

@@ -1,86 +1,93 @@
-import { FunctionComponent } from "react";
-import styled from "styled-components/macro";
+import { FunctionComponent, useState } from "react";
 import { defaultTheme } from "../../utils/global-styles";
 import Text from "../text";
+import {
+  Container,
+  ErrorMessageContainer,
+  StyledInput,
+  StyledLabel,
+} from "./styles";
 
-export interface InputProps extends React.HTMLAttributes<HTMLElement> {
-  dataTestId?: string;
-  label?: string;
-  placeholder?: string;
-  type?: string;
-  inputText?: string;
-  name?: string;
-  status?: string;
-  statusMessage?: string;
-  value?: string | number;
+export enum InputStatus {
+  error = "error",
 }
 
-const defaultTestId = "styled-input-container";
+export type InputType = "text" | "email" | "number" | "tel";
+export interface InputProps extends React.HTMLAttributes<HTMLElement> {
+  dataTestId?: string;
+  label: string;
+  type?: InputType;
+  name?: string;
+  status?: InputStatus;
+  statusMessage?: string;
+  customValue?: string | number;
+  disabled?: boolean;
+  pattern?: string;
+  minLength?: number;
+  maxLength?: number;
+  onChangeCallback?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClickCallback?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onBlurCallback?: (event: React.FocusEvent<HTMLInputElement>) => void;
+}
 
-const Container = styled.div`
-  position: relative;
-  height: 60px;
-  margin: 6px 0;
-`;
-
-const StyledInput = styled.input<{
-  status?: string | undefined;
-}>`
-  font-size: 14px;
-  border: 1px solid
-    ${(props) =>
-      props.status
-        ? defaultTheme.status.errorColor
-        : defaultTheme.input.borderColor};
-  width: 100%;
-  height: 50px;
-  border-radius: 8px;
-  background-color: ${defaultTheme.input.defaultBackgroundColor};
-  outline: none;
-`;
-
-const StyledLabel = styled.label`
-  position: absolute;
-  pointer-events: none;
-  left: 20px;
-  top: 14px;
-  transition: 0.3s ease all;
-
-  ${StyledInput}:focus ~ & {
-    top: 6px;
-    left: 5px;
-    font-size: 11px;
-    opacity: 0.6;
-  }
-`;
+export const defaultTestId = "styled-input-container";
+export const errorMessageTestId = "styled-input-error-message";
+export const inputTestId = "styled-input";
 
 const Input: FunctionComponent<InputProps> = ({
   dataTestId,
   label,
-  type,
-  onChange,
-  onClick,
-  onBlur,
+  type = "text",
+  onChangeCallback,
+  onClickCallback,
+  onBlurCallback,
   name,
-  value,
+  customValue,
   status,
   statusMessage,
+  disabled,
+  pattern,
+  minLength,
+  maxLength,
 }) => {
+  const [value, setValue] = useState("");
+  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+    onChangeCallback && onChangeCallback(event);
+  };
+
+  const handleOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
+    onClickCallback && onClickCallback(event);
+  };
+
+  const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
+    onBlurCallback && onBlurCallback(event);
+  };
   return (
     <Container data-testid={dataTestId || defaultTestId}>
       <StyledInput
-        id="inputField"
+        id="styled-input"
+        data-testid={inputTestId}
         type={type}
         status={status}
-        onChange={onChange}
-        onClick={onClick}
+        onChange={handleOnChange}
+        onClick={handleOnClick}
+        placeholder=" "
         name={name}
-        value={value}
-        onBlur={onBlur}
+        value={customValue || value}
+        onBlur={handleOnBlur}
+        disabled={disabled}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
       />
-      <StyledLabel htmlFor="inputField">{label}</StyledLabel>
+      <StyledLabel htmlFor="styled-input">{label}</StyledLabel>
       {status && (
-        <Text color={defaultTheme.status.errorColor}>{statusMessage}</Text>
+        <ErrorMessageContainer data-testid={errorMessageTestId}>
+          <Text color={defaultTheme.status.errorColor} size="small">
+            {statusMessage}
+          </Text>
+        </ErrorMessageContainer>
       )}
     </Container>
   );
