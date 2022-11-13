@@ -47,6 +47,7 @@ exports[`Input styles renders 1`] = `
   color: transparent;
 }
 
+.c2:not(:placeholder-shown),
 .c2:focus {
   background-color: #F7F7F7;
 }

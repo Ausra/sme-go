@@ -64,10 +64,10 @@ const Input: FunctionComponent<InputProps> = ({
     onBlurCallback && onBlurCallback(event);
   };
   return (
-    <Container data-testid={dataTestId || defaultTestId}>
+    <Container data-testid={defaultTestId}>
       <StyledInput
         id="styled-input"
-        data-testid={inputTestId}
+        data-testid={dataTestId || inputTestId}
         type={type}
         status={status}
         onChange={handleOnChange}
