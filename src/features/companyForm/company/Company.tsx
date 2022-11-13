@@ -21,6 +21,7 @@ const Company: FunctionComponent<CompanyProps> = ({
         title="Company"
         handleNextClick={handleNextClick}
         handleBackClick={handleBackClick}
+        primaryButtonType="button"
       >
         <InputField name={COMPANY.CODE} label="Company code" />
         <InputField name={COMPANY.NAME} label="Company name" />

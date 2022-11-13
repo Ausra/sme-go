@@ -1,6 +1,7 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components/macro";
 import { defaultTheme } from "../../utils/global-styles";
+import Text from "../text";
 
 export interface InputProps extends React.HTMLAttributes<HTMLElement> {
   dataTestId?: string;
@@ -22,9 +23,15 @@ const Container = styled.div`
   margin: 6px 0;
 `;
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{
+  status?: string | undefined;
+}>`
   font-size: 14px;
-  border: 1px solid ${defaultTheme.input.borderColor};
+  border: 1px solid
+    ${(props) =>
+      props.status
+        ? defaultTheme.status.errorColor
+        : defaultTheme.input.borderColor};
   width: 100%;
   height: 50px;
   border-radius: 8px;
@@ -56,18 +63,24 @@ const Input: FunctionComponent<InputProps> = ({
   onClick,
   name,
   value,
+  status,
+  statusMessage,
 }) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
       <StyledInput
         id="inputField"
         type={type}
+        status={status}
         onChange={onChange}
         onClick={onClick}
         name={name}
         value={value}
       />
       <StyledLabel htmlFor="inputField">{label}</StyledLabel>
+      {status && (
+        <Text color={defaultTheme.status.errorColor}>{statusMessage}</Text>
+      )}
     </Container>
   );
 };
