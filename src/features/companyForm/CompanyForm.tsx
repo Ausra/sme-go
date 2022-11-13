@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Stepper from "../../components/stepper";
 import Text from "../../components/text";
 import style from "./companyForm.module.scss";
@@ -7,6 +7,7 @@ import { StepStates } from "../../components/stepper/step/Step";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import {
   companyAsync,
+  selectActiveStep,
   selectCompanySteps,
   selectCompanyStepsCounter,
   setStepStateActive,
@@ -14,7 +15,9 @@ import {
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import Company from "./company/Company";
 import ContactPerson from "./contactPerson";
-import { Form, Formik } from "formik";
+import { Form, Formik, FormikErrors } from "formik";
+import { companyValidationSchema } from "./company/company.validation";
+import { contactPersonValidationSchema } from "./contactPerson/contactPerson.validation";
 
 export interface Step {
   id: string;
@@ -81,21 +84,77 @@ const initialValues = {
 
 export function CompanyForm() {
   const companySteps = useAppSelector(selectCompanySteps);
+  const activeStepId = useAppSelector(selectActiveStep);
   const companyStepCounter = useAppSelector(selectCompanyStepsCounter);
   const dispatch = useAppDispatch();
+
+  const [validationSchema, setValidationSchema] = useState(
+    companyValidationSchema
+  );
 
   const handleStepClick = (e: any) => {
     dispatch(setStepStateActive(e.target.id));
   };
 
-  const handleNextClick = () => {
+  const gotToNextStep = () => {
     const currentStepIndex = companySteps.findIndex(
       (step) => step.stepState === StepStates.active
     );
+
     if (companySteps[currentStepIndex + 1].stepState === StepStates.disabled) {
       return;
     }
     dispatch(setStepStateActive(companySteps[currentStepIndex + 1].id));
+  };
+
+  const getForm = ({
+    validateForm,
+    submitForm,
+    isValid,
+    handleBlur,
+  }: {
+    validateForm: () => Promise<FormikErrors<CompanyFormValues>>;
+    submitForm: () => void;
+    isValid: boolean;
+    handleBlur: (e: any) => void;
+  }) => {
+    switch (activeStepId) {
+      case "step1": {
+        setValidationSchema(companyValidationSchema);
+        return (
+          <Company
+            primaryButtonDisabled={!isValid}
+            handleBlur={handleBlur}
+            handleBackClick={handleBackClick}
+            handleNextClick={() => handleNextClick(validateForm)}
+          />
+        );
+      }
+      case "step2": {
+        setValidationSchema(contactPersonValidationSchema);
+        return (
+          <ContactPerson
+            handleBackClick={handleBackClick}
+            handleNextClick={() => handleNextClick(validateForm, submitForm)}
+          />
+        );
+      }
+
+      default:
+        return null;
+    }
+  };
+
+  const handleNextClick = (
+    validateForm: () => Promise<FormikErrors<CompanyFormValues>>,
+    submitForm?: () => void
+  ) => {
+    validateForm();
+    if (submitForm) {
+      submitForm();
+      return;
+    }
+    gotToNextStep();
   };
 
   const handleBackClick = () => {
@@ -112,6 +171,7 @@ export function CompanyForm() {
     console.log(values);
     dispatch(companyAsync(2));
   };
+
   return (
     <div className={style.container}>
       <div className={style.contentContainer}>
@@ -128,17 +188,20 @@ export function CompanyForm() {
             <Text>Application</Text>
             <Button title="Fill in later" margin="0 0" />
           </div>
-          <Formik onSubmit={onSubmit} initialValues={initialValues}>
-            {({ handleSubmit, submitForm }) => (
+          <Formik
+            onSubmit={onSubmit}
+            initialValues={initialValues}
+            validationSchema={validationSchema}
+          >
+            {({
+              handleSubmit,
+              isValid,
+              submitForm,
+              validateForm,
+              handleBlur,
+            }) => (
               <Form onSubmit={handleSubmit}>
-                <Company
-                  handleBackClick={handleBackClick}
-                  handleNextClick={handleNextClick}
-                />
-                <ContactPerson
-                  handleBackClick={handleBackClick}
-                  handleNextClick={submitForm}
-                />
+                {getForm({ validateForm, submitForm, isValid, handleBlur })}
               </Form>
             )}
           </Formik>

@@ -51,7 +51,6 @@ const StyledLabel = styled.label`
     left: 5px;
     font-size: 11px;
     opacity: 0.6;
-    background-color: ${defaultTheme.input.backgroundColor};
   }
 `;
 
@@ -61,6 +60,7 @@ const Input: FunctionComponent<InputProps> = ({
   type,
   onChange,
   onClick,
+  onBlur,
   name,
   value,
   status,
@@ -76,6 +76,7 @@ const Input: FunctionComponent<InputProps> = ({
         onClick={onClick}
         name={name}
         value={value}
+        onBlur={onBlur}
       />
       <StyledLabel htmlFor="inputField">{label}</StyledLabel>
       {status && (

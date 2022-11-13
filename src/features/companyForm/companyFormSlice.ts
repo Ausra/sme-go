@@ -86,6 +86,13 @@ export const { setCompanyStepsCounterValue, setStepStateActive } =
 export const selectCompanySteps = (state: RootState) =>
   state.companyForm.companySteps;
 
+export const selectActiveStep = (state: RootState) => {
+  const activeStep = state.companyForm.companySteps.find(
+    (step) => step.stepState === StepStates.active
+  )?.id;
+  return activeStep;
+};
+
 export const selectCompanyStepsCounter = (state: RootState) =>
   state.companyForm.companyStepsCounter;
 

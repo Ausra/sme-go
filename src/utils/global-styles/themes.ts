@@ -8,6 +8,7 @@ export const defaultTheme = {
     primaryTextColor: neutral[100],
     secondaryColor: neutral[100],
     secondaryTextColor: blue[100],
+    disabledColor: neutral[400],
   },
   step: {
     activeColor: blue[100],
@@ -18,6 +19,7 @@ export const defaultTheme = {
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,
   textColor: neutral[700],
+  disabledTextColor: neutral[400],
   input: {
     defaultBackgroundColor: neutral[100],
     borderColor: neutral[500],

@@ -8,14 +8,28 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   primary?: boolean;
   margin?: string;
   type?: "button" | "submit";
+  disabled?: boolean;
+}
+
+export interface StyledButtonProps {
+  primary?: boolean | undefined;
+  margin?: string;
+  disabled?: boolean;
 }
 
 export const defaultTestId = "styled-button";
 
-const StyledButton = styled.button<{
-  primary?: boolean | undefined;
-  margin?: string;
-}>`
+const getBackgroundColor = (props: StyledButtonProps) => {
+  if (props.disabled) {
+    return defaultTheme.button.disabledColor;
+  } else {
+    return props.primary
+      ? defaultTheme.button.primaryColor
+      : defaultTheme.button.secondaryColor;
+  }
+};
+
+const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 24px;
   border: 1px solid ${defaultTheme.button.primaryColor};
   color: white;
@@ -23,10 +37,7 @@ const StyledButton = styled.button<{
   padding: 12px 24px;
   height: 42px;
 
-  background: ${(props) =>
-    props.primary
-      ? defaultTheme.button.primaryColor
-      : defaultTheme.button.secondaryColor};
+  background: ${(props) => getBackgroundColor(props)};
   color: ${(props) =>
     props.primary
       ? defaultTheme.button.primaryTextColor
@@ -40,6 +51,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   dataTestId,
   margin,
   type,
+  disabled,
 }) => {
   return (
     <>
@@ -49,6 +61,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         onClick={onClick}
         data-testid={defaultTestId || dataTestId}
         margin={margin}
+        disabled={disabled}
       >
         {title}
       </StyledButton>

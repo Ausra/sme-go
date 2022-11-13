@@ -5,14 +5,20 @@ import Input, { InputProps } from "../input";
 interface InputFieldProps extends InputProps {
   dataTestId?: string;
   name: string;
+  handleBlur?: (e: any) => void;
 }
 
-const InputField: FunctionComponent<InputFieldProps> = ({ name, label }) => {
+const InputField: FunctionComponent<InputFieldProps> = ({
+  name,
+  label,
+  handleBlur,
+}) => {
   const [field, meta] = useField(name);
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     field.onChange(event);
   };
+
   return (
     <>
       <Input
@@ -22,6 +28,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({ name, label }) => {
         value={field.value}
         label={label}
         onChange={handleOnChange}
+        onBlur={handleBlur}
       />
     </>
   );

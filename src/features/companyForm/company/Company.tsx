@@ -6,14 +6,18 @@ import { COMPANY } from "./company.validation";
 
 interface CompanyProps {
   dataTestId?: string;
+  primaryButtonDisabled?: boolean;
   handleNextClick: () => void;
   handleBackClick: () => void;
+  handleBlur: (e: any) => void;
 }
 
 const Company: FunctionComponent<CompanyProps> = ({
   dataTestId,
   handleNextClick,
   handleBackClick,
+  primaryButtonDisabled,
+  handleBlur,
 }) => {
   return (
     <>
@@ -22,8 +26,13 @@ const Company: FunctionComponent<CompanyProps> = ({
         handleNextClick={handleNextClick}
         handleBackClick={handleBackClick}
         primaryButtonType="button"
+        primaryButtonDisabled={primaryButtonDisabled}
       >
-        <InputField name={COMPANY.CODE} label="Company code" />
+        <InputField
+          name={COMPANY.CODE}
+          label="Company code"
+          handleBlur={handleBlur}
+        />
         <InputField name={COMPANY.NAME} label="Company name" />
         <DropdownField
           name={COMPANY.COUNTRY}

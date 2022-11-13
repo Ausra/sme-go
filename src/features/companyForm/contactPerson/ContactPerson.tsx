@@ -24,29 +24,15 @@ const ContactPerson: FunctionComponent<ContactPersonProps> = ({
   const handleOnChange = (e: any) => {
     console.log(e.target.checked);
   };
+
   return (
     <>
-      <Card
-        title="Contact Person"
-        handleNextClick={handleNextClick}
-        handleBackClick={handleBackClick}
-        primaryButtonType="submit"
-      >
-        <InputField name={CONTACT_PERSON.FIRST_NAME} label="Name" />
-        <InputField name={CONTACT_PERSON.LAST_NAME} label="Surname" />
-        <InputField name={CONTACT_PERSON.JOB_TITLE} label="Job Title" />
-        <InputField name={CONTACT_PERSON.EMAIL} label="E-mail address" />
-        <div>
-          <InputField name={CONTACT_PERSON.COUNTRY_CODE} label="Country code" />
-          <Input name={CONTACT_PERSON.PHONE} label="Phone number" />
-        </div>
-        <CheckboxField
-          name={CONTACT_PERSON.AGREEMENT_1}
-          id="checkbox1"
-          checked={false}
-          onChange={handleOnChange}
+      {showSmallText ? (
+        <Card
+          handleBackClick={() => setShowSmallText(false)}
+          hidePrimaryButton={true}
         >
-          <Text>
+          <Text size="small">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
             gravida ante nec metus feugiat pellentesque. Vivamus elementum purus
             sapien, id gravida nisl suscipit sit amet. Pellentesque a tellus
@@ -57,36 +43,75 @@ const ContactPerson: FunctionComponent<ContactPersonProps> = ({
             condimentum. Mauris vel molestie ex. Phasellus mollis quis dolor ut
             dapibus. Sed eget dolor nec diam facilisis interdum et in purus.
           </Text>
-          <TextButton
-            title="Click to read more"
-            margin="0 0"
-            onClick={() => setShowSmallText(true)}
-          />
-        </CheckboxField>
-        <CheckboxField
-          name={CONTACT_PERSON.AGREEMENT_2}
-          id="checkbox1"
-          checked={false}
-          onChange={handleOnChange}
+        </Card>
+      ) : (
+        <Card
+          title="Contact Person"
+          handleNextClick={handleNextClick}
+          handleBackClick={handleBackClick}
+          primaryButtonType="submit"
         >
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
-            gravida ante nec metus feugiat pellentesque. Vivamus elementum purus
-            sapien, id gravida nisl suscipit sit amet. Pellentesque a tellus
-            odio. Sed pretium porttitor efficitur. Morbi auctor non dolor in
-            convallis. Quisque aliquam a risus ac dictum. Class aptent taciti
-            sociosqu ad litora torquent per conubia nostra, per inceptos
-            himenaeos. Pellentesque viverra tellus sit amet leo efficitur
-            condimentum. Mauris vel molestie ex. Phasellus mollis quis dolor ut
-            dapibus. Sed eget dolor nec diam facilisis interdum et in purus.
-          </Text>
-          <TextButton
-            title="Click to read more"
-            margin="0 0"
-            onClick={() => setShowSmallText(true)}
-          />
-        </CheckboxField>
-      </Card>
+          <InputField name={CONTACT_PERSON.FIRST_NAME} label="Name" />
+          <InputField name={CONTACT_PERSON.LAST_NAME} label="Surname" />
+          <InputField name={CONTACT_PERSON.JOB_TITLE} label="Job Title" />
+          <InputField name={CONTACT_PERSON.EMAIL} label="E-mail address" />
+          <div>
+            <InputField
+              name={CONTACT_PERSON.COUNTRY_CODE}
+              label="Country code"
+            />
+            <Input name={CONTACT_PERSON.PHONE} label="Phone number" />
+          </div>
+          <CheckboxField
+            name={CONTACT_PERSON.AGREEMENT_1}
+            id="checkbox1"
+            checked={false}
+            onChange={handleOnChange}
+          >
+            <Text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+              gravida ante nec metus feugiat pellentesque. Vivamus elementum
+              purus sapien, id gravida nisl suscipit sit amet. Pellentesque a
+              tellus odio. Sed pretium porttitor efficitur. Morbi auctor non
+              dolor in convallis. Quisque aliquam a risus ac dictum. Class
+              aptent taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Pellentesque viverra tellus sit amet leo
+              efficitur condimentum. Mauris vel molestie ex. Phasellus mollis
+              quis dolor ut dapibus. Sed eget dolor nec diam facilisis interdum
+              et in purus.
+            </Text>
+            <TextButton
+              title="Click to read more"
+              margin="0 0"
+              onClick={() => setShowSmallText(true)}
+            />
+          </CheckboxField>
+          <CheckboxField
+            name={CONTACT_PERSON.AGREEMENT_2}
+            id="checkbox1"
+            checked={false}
+            onChange={handleOnChange}
+          >
+            <Text>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+              gravida ante nec metus feugiat pellentesque. Vivamus elementum
+              purus sapien, id gravida nisl suscipit sit amet. Pellentesque a
+              tellus odio. Sed pretium porttitor efficitur. Morbi auctor non
+              dolor in convallis. Quisque aliquam a risus ac dictum. Class
+              aptent taciti sociosqu ad litora torquent per conubia nostra, per
+              inceptos himenaeos. Pellentesque viverra tellus sit amet leo
+              efficitur condimentum. Mauris vel molestie ex. Phasellus mollis
+              quis dolor ut dapibus. Sed eget dolor nec diam facilisis interdum
+              et in purus.
+            </Text>
+            <TextButton
+              title="Click to read more"
+              margin="0 0"
+              onClick={() => setShowSmallText(true)}
+            />
+          </CheckboxField>
+        </Card>
+      )}
     </>
   );
 };

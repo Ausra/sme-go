@@ -8,6 +8,8 @@ export interface FooterProps {
   handleNextClick?: () => void;
   handleBackClick?: () => void;
   primaryButtonType?: "button" | "submit";
+  hidePrimaryButton?: boolean;
+  primaryButtonDisabled?: boolean;
 }
 
 const Container = styled.div`
@@ -21,20 +23,24 @@ const Container = styled.div`
 
 const Footer: FunctionComponent<FooterProps> = ({
   dataTestId,
-  children,
   handleNextClick,
   handleBackClick,
   primaryButtonType,
+  hidePrimaryButton,
+  primaryButtonDisabled,
 }) => {
   return (
     <Container>
       <Button title="Back" onClick={handleBackClick} />
-      <Button
-        title="Next"
-        primary
-        onClick={handleNextClick}
-        type={primaryButtonType}
-      />
+      {!hidePrimaryButton && (
+        <Button
+          disabled={primaryButtonDisabled}
+          title="Next"
+          primary
+          onClick={handleNextClick}
+          type={primaryButtonType}
+        />
+      )}
     </Container>
   );
 };

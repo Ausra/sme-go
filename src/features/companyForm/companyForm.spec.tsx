@@ -1,5 +1,6 @@
+import { render, screen } from "@testing-library/react";
 import { StepStates } from "../../components/stepper/step";
-import { companySteps } from "./CompanyForm";
+import CompanyForm from "./CompanyForm";
 import companyFormReducer, {
   CompanyFormState,
   setStepStateActive,
@@ -44,4 +45,22 @@ describe("companyForm reducer", () => {
       { id: "step2", stepState: "active", title: "Company" },
     ]);
   });
+});
+
+describe("CompanyForm", () => {
+  it("should render", () => {
+    render(<CompanyForm />);
+    expect(screen.getByText("Company")).toBeInTheDocument();
+  });
+
+  it("should render company form", () => {});
+  it("should render stepper", () => {});
+
+  it("should fill out form and call onSubmit with correct values", () => {});
+});
+
+describe("CompanyForm validation", () => {
+  it("should validate company code", () => {});
+  it("should validate email", () => {});
+  it("should validate phone number", () => {});
 });
