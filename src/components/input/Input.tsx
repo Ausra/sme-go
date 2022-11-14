@@ -82,7 +82,7 @@ const Input: FunctionComponent<InputProps> = ({
         maxLength={maxLength}
       />
       <StyledLabel htmlFor="styled-input">{label}</StyledLabel>
-      {status && (
+      {status === InputStatus.error && (
         <ErrorMessageContainer data-testid={errorMessageTestId}>
           <Text color={defaultTheme.status.errorColor} size="small">
             {statusMessage}

@@ -1,33 +1,40 @@
-import { FunctionComponent, ReactElement } from "react";
-import styled from "styled-components/macro";
+import { FunctionComponent, ReactElement, useState } from "react";
+import { Container, StyledCheckboxInput, StyledLabel } from "./style";
 
 export interface CheckboxProps {
   dataTestId?: string;
-  children: string | ReactElement[];
+  children?: string | ReactElement[];
   id: string;
-  checked?: boolean;
-  onChange: (e: any) => void;
+  showChecked?: boolean;
+  onChangeCallback?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const StyledCheckboxInput = styled.input``;
-const StyledLabel = styled.label``;
+export const defaultTestId = "styled-checkbox-container";
+export const checkboxTestId = "styled-checkbox-input";
 
 const Checkbox: FunctionComponent<CheckboxProps> = ({
+  dataTestId,
   children,
   id,
-  checked,
-  onChange,
+  showChecked,
+  onChangeCallback,
 }) => {
+  const [checked, setChecked] = useState(false);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+    onChangeCallback && onChangeCallback(event);
+  };
   return (
-    <>
+    <Container data-testid={defaultTestId}>
       <StyledCheckboxInput
+        data-testid={dataTestId || checkboxTestId}
         type="checkbox"
         id={id}
-        checked={checked}
-        onChange={onChange}
+        checked={showChecked || checked}
+        onChange={handleChange}
       />
       <StyledLabel htmlFor={id}>{children}</StyledLabel>
-    </>
+    </Container>
   );
 };
 

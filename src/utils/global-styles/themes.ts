@@ -24,6 +24,7 @@ export const defaultTheme = {
   bodyBackgroundColor: neutral[200],
   primaryFont: primaryFont,
   textColor: neutral[700],
+  smallTextColor: neutral[600],
   disabledTextColor: neutral[400],
   input: {
     defaultBackgroundColor: neutral[100],

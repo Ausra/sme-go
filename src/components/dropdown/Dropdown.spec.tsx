@@ -44,10 +44,7 @@ describe("Dropdown", () => {
     await user.click(listItem[0]);
 
     await waitFor(() => {
-      expect(onSelectCallback).toHaveBeenCalledWith(
-        OPTIONS[0].id,
-        OPTIONS[0].value
-      );
+      expect(onSelectCallback).toHaveBeenCalledWith(OPTIONS[0].value);
     });
   });
 });

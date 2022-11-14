@@ -8,17 +8,15 @@ interface CheckboxFieldProps extends CheckboxProps {
 
 const CheckboxField: FunctionComponent<CheckboxFieldProps> = ({
   name,
-  onChange,
   children,
-  checked,
   ...restProps
 }) => {
   const [field, _, helpers] = useField({ name, type: "checkbox" });
   return (
     <>
       <Checkbox
-        checked={field.checked}
-        onChange={(event) => {
+        showChecked={field.checked}
+        onChangeCallback={(event) => {
           helpers.setValue(event.target.checked);
         }}
         {...restProps}

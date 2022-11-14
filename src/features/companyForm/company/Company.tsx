@@ -36,10 +36,10 @@ const Company: FunctionComponent<CompanyProps> = ({
         <InputField name={COMPANY.NAME} label="Company name" />
         <DropdownField
           name={COMPANY.COUNTRY}
-          label="country"
+          label="Country of Registration"
           options={[
-            { country: "lithuania", id: "lithuania1" },
-            { country: "USA", id: "usa1" },
+            { value: "lithuania", id: "lithuania1" },
+            { value: "USA", id: "usa1" },
           ]}
         />
       </Card>
