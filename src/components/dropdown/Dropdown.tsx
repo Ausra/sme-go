@@ -33,16 +33,16 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
   customValue,
   onSelectCallback,
 }) => {
-  const [open, setOpen] = useState(false);
-  const [selected, setSelected] = useState(options[0].value);
+  const [open, setOpen] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const handleSelect = (id: any, country: any) => {
-    setSelected(country);
-    onSelectCallback && onSelectCallback(country);
+  const handleSelect = (value: string) => {
+    setSelected(value);
+    onSelectCallback && onSelectCallback(value);
     setOpen(false);
   };
 
@@ -67,8 +67,8 @@ const Dropdown: FunctionComponent<DropdownProps> = ({
           {options.map((option, index) => (
             <StyledListItem key={index} data-testid={listItemTestId}>
               <StyledListButton
-                data-testId={listItemButtonId}
-                onClick={() => handleSelect(option.id, option.value)}
+                data-testid={listItemButtonId}
+                onClick={() => handleSelect(option.value)}
               >
                 {option.value}
               </StyledListButton>

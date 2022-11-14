@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import { defaultTheme, typeScale } from "../../utils/global-styles";
+import { typeScale } from "../../utils/global-styles";
 
 export const Container = styled.div`
   display: flex;
@@ -8,8 +8,9 @@ export const Container = styled.div`
 `;
 
 export const StyledCheckboxInput = styled.input`
-  outline: 1px solid ${defaultTheme.input.borderColor};
   border: transparent;
+  margin-top: 16px;
+  margin-right: 16px;
 `;
 export const StyledLabel = styled.label`
   font-size: ${typeScale.small};

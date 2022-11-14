@@ -63,6 +63,7 @@ const Input: FunctionComponent<InputProps> = ({
   const handleOnBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     onBlurCallback && onBlurCallback(event);
   };
+
   return (
     <Container data-testid={defaultTestId}>
       <StyledInput

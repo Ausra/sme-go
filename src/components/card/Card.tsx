@@ -8,8 +8,8 @@ interface CardProps {
   dataTestId?: string;
   children?: ReactElement[] | ReactElement;
   title?: string;
-  handleNextClick?: () => void;
-  handleBackClick?: () => void;
+  handlePrimaryButtonClick?: () => void;
+  handleSecondaryButtonClick?: () => void;
   primaryButtonType?: "button" | "submit";
   primaryButtonDisabled?: boolean;
   hidePrimaryButton?: boolean;
@@ -37,8 +37,8 @@ const Card: FunctionComponent<CardProps> = ({
   dataTestId,
   children,
   title,
-  handleNextClick,
-  handleBackClick,
+  handlePrimaryButtonClick,
+  handleSecondaryButtonClick,
   primaryButtonType,
   hidePrimaryButton,
   primaryButtonDisabled,
@@ -50,8 +50,8 @@ const Card: FunctionComponent<CardProps> = ({
       <Footer
         primaryButtonDisabled={primaryButtonDisabled}
         primaryButtonType={primaryButtonType}
-        handleNextClick={handleNextClick}
-        handleBackClick={handleBackClick}
+        handlePrimaryButtonClick={handlePrimaryButtonClick}
+        handleSecondaryButtonClick={handleSecondaryButtonClick}
         hidePrimaryButton={hidePrimaryButton}
       />
     </Container>

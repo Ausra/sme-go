@@ -16,8 +16,9 @@ exports[`Checkbox Styles should render 1`] = `
 }
 
 .c1 {
-  outline: 1px solid #CCCCCC;
   border: transparent;
+  margin-top: 16px;
+  margin-right: 16px;
 }
 
 .c2 {

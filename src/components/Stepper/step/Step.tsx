@@ -30,6 +30,7 @@ const VerticalDash = styled.div<{ state: StepStates }>`
   width: 2px;
   height: 50px;
   background-color: ${(props) => stepColor[props.state]};
+  margin-right: 16px;
 `;
 
 const StyledStepButton = styled.button`

@@ -1,11 +1,11 @@
 import { useField } from "formik";
-import { FunctionComponent } from "react";
+import { ChangeEvent, FocusEvent, FunctionComponent } from "react";
 import Input, { InputProps, InputStatus } from "../../input";
 
 interface InputFieldProps extends InputProps {
   dataTestId?: string;
   name: string;
-  handleBlur?: (e: any) => void;
+  handleBlur?: (e: FocusEvent<Element>) => void;
 }
 
 const InputField: FunctionComponent<InputFieldProps> = ({
@@ -15,7 +15,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
 }) => {
   const [field, meta] = useField(name);
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     field.onChange(event);
   };
 
@@ -28,7 +28,7 @@ const InputField: FunctionComponent<InputFieldProps> = ({
         customValue={field.value}
         label={label}
         onChangeCallback={handleOnChange}
-        onBlur={handleBlur}
+        onBlurCallback={handleBlur}
       />
     </>
   );

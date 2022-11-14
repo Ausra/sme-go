@@ -1,27 +1,42 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { StepStates } from "../../components/stepper/step";
 import { RootState } from "../../store/store";
-import { companySteps, Step } from "./CompanyForm";
+import { companySteps } from "./companyForm.mocks";
+import { CompanyFormValues, Step } from "./CompanyForm";
 import { fetchCompany } from "./companyFormAPI";
 
 export interface CompanyFormState {
-  value: number;
   status: "idle" | "loading" | "failed";
   companySteps: Step[];
+  companyData: CompanyFormValues;
   companyStepsCounter: number;
 }
 
-const initialState: CompanyFormState = {
-  value: 0,
+const companyValues: CompanyFormValues = {
+  companyName: "",
+  companyCode: "",
+  country: "",
+  firstName: "",
+  lastName: "",
+  jobTitle: "",
+  email: "",
+  countryCode: "",
+  phone: "",
+  agreement1: false,
+  agreement2: false,
+};
+
+export const initialState: CompanyFormState = {
   companySteps: companySteps,
   companyStepsCounter: 0,
   status: "idle",
+  companyData: companyValues,
 };
 
 export const companyAsync = createAsyncThunk(
   "company/fetchCompany",
-  async (amount: number) => {
-    const response = await fetchCompany(amount);
+  async (values: CompanyFormValues) => {
+    const response = await fetchCompany(values);
     return response.data;
   }
 );
@@ -47,13 +62,14 @@ export const companyFormSlice = createSlice({
           return;
         }
         const activeStep = { ...setActiveStep, stepState: StepStates.active };
-        const setActiveStepIndex = state.companySteps.findIndex(
-          (step) => step.id === action.payload
-        );
         const inactiveStep = {
           ...setInactiveStep,
           stepState: StepStates.inactive,
         };
+
+        const setActiveStepIndex = state.companySteps.findIndex(
+          (step) => step.id === action.payload
+        );
         const setInactiveStepIndex = state.companySteps.findIndex(
           (step) => step.stepState === StepStates.active
         );
@@ -72,7 +88,7 @@ export const companyFormSlice = createSlice({
       })
       .addCase(companyAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.value += action.payload;
+        state.companyData = action.payload;
       })
       .addCase(companyAsync.rejected, (state) => {
         state.status = "failed";
@@ -92,6 +108,9 @@ export const selectActiveStep = (state: RootState) => {
   )?.id;
   return activeStep;
 };
+
+export const selectCompanyData = (state: RootState) =>
+  state.companyForm.companyData;
 
 export const selectCompanyStepsCounter = (state: RootState) =>
   state.companyForm.companyStepsCounter;

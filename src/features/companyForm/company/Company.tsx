@@ -7,24 +7,26 @@ import { COMPANY } from "./company.validation";
 interface CompanyProps {
   dataTestId?: string;
   primaryButtonDisabled?: boolean;
-  handleNextClick: () => void;
-  handleBackClick: () => void;
+  handlePrimaryButtonClick: () => void;
+  handleSecondaryButtonClick: () => void;
   handleBlur: (e: any) => void;
 }
 
+export const defaultTestId = "company-form";
 const Company: FunctionComponent<CompanyProps> = ({
   dataTestId,
-  handleNextClick,
-  handleBackClick,
+  handlePrimaryButtonClick,
+  handleSecondaryButtonClick,
   primaryButtonDisabled,
   handleBlur,
 }) => {
   return (
     <>
       <Card
+        dataTestId={dataTestId || defaultTestId}
         title="Company"
-        handleNextClick={handleNextClick}
-        handleBackClick={handleBackClick}
+        handlePrimaryButtonClick={handlePrimaryButtonClick}
+        handleSecondaryButtonClick={handleSecondaryButtonClick}
         primaryButtonType="button"
         primaryButtonDisabled={primaryButtonDisabled}
       >
@@ -33,7 +35,11 @@ const Company: FunctionComponent<CompanyProps> = ({
           label="Company code"
           handleBlur={handleBlur}
         />
-        <InputField name={COMPANY.NAME} label="Company name" />
+        <InputField
+          name={COMPANY.NAME}
+          label="Company name"
+          handleBlur={handleBlur}
+        />
         <DropdownField
           name={COMPANY.COUNTRY}
           label="Country of Registration"

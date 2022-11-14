@@ -20,7 +20,7 @@ const StyledTextButton = styled.button<{
 }>`
   color: ${defaultTheme.button.primaryColor};
   margin: ${(props) => (props.margin ? props.margin : `8px 16px`)};
-  height: ${(props) => (props.height ? props.height : "42px")};
+  height: ${(props) => (props.height ? props.height : `42px`)};
   display: inline-block;
   border: none;
   background: transparent;

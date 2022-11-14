@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components/macro";
+import { defaultTheme } from "../../utils/global-styles";
 import Text from "../text";
 import Step, { StepStates } from "./step";
 
@@ -21,6 +22,13 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const CounterContainer = styled.div`
+  margin-left: 8px;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
+`;
+
 const Stepper: FunctionComponent<StepperProps> = ({
   dataTestId,
   steps,
@@ -29,7 +37,9 @@ const Stepper: FunctionComponent<StepperProps> = ({
 }) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
-      <Text>{stepCounter}</Text>
+      <CounterContainer>
+        <Text color={defaultTheme.primaryColor}>{stepCounter}</Text>
+      </CounterContainer>
       {steps.map((step) => (
         <Step
           title={step.title}

@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, {
+  FocusEvent,
+  FunctionComponent,
+  useEffect,
+  useState,
+} from "react";
 import Stepper from "../../components/stepper";
 import Text from "../../components/text";
 import style from "./companyForm.module.scss";
-import Button from "../../components/button";
 import { StepStates } from "../../components/stepper/step/Step";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import {
   companyAsync,
   selectActiveStep,
+  selectCompanyData,
   selectCompanySteps,
   selectCompanyStepsCounter,
   setStepStateActive,
@@ -18,11 +23,13 @@ import ContactPerson from "./contactPerson";
 import { Form, Formik, FormikErrors } from "formik";
 import { companyValidationSchema } from "./company/company.validation";
 import { contactPersonValidationSchema } from "./contactPerson/contactPerson.validation";
+import TextButton from "../../components/textButton";
 
 export interface Step {
   id: string;
   title: string;
   stepState: StepStates;
+  completedCount: number;
 }
 
 export interface CompanyFormValues {
@@ -39,113 +46,47 @@ export interface CompanyFormValues {
   agreement2: boolean;
 }
 
-export const companySteps = [
-  {
-    title: "Product And Amount",
-    id: "step1",
-    stepState: StepStates.active,
-  },
-  {
-    title: "Company",
-    id: "step2",
-    stepState: StepStates.inactive,
-  },
-  {
-    title: "Contact Person",
-    id: "step3",
-    stepState: StepStates.disabled,
-  },
-  {
-    title: "Beneficial Owners",
-    id: "step4",
-    stepState: StepStates.disabled,
-  },
-  {
-    title: "Factoring Type",
-    id: "step5",
-    stepState: StepStates.disabled,
-  },
-  { title: "Third Parties", id: "step6", stepState: StepStates.disabled },
-];
+export interface CompanyFormProps {}
 
-const initialValues = {
-  companyName: "",
-  companyCode: "",
-  country: "",
-  firstName: "",
-  lastName: "",
-  jobTitle: "",
-  email: "",
-  countryCode: "",
-  phone: "",
-  agreement1: false,
-  agreement2: false,
-};
+export const defaultTestId = "company-form-container";
+export const companyFormTestId = "company-form";
+export const contactPersonFormTestId = "contact-person-form";
+export const stepperTestId = "stepper";
 
-export function CompanyForm() {
+const CompanyForm: FunctionComponent<CompanyFormProps> = () => {
   const companySteps = useAppSelector(selectCompanySteps);
   const activeStepId = useAppSelector(selectActiveStep);
   const companyStepCounter = useAppSelector(selectCompanyStepsCounter);
+  const companyData = useAppSelector(selectCompanyData);
   const dispatch = useAppDispatch();
 
   const [validationSchema, setValidationSchema] = useState(
     companyValidationSchema
   );
 
-  const handleStepClick = (e: any) => {
-    dispatch(setStepStateActive(e.target.id));
+  useEffect(() => {
+    if (activeStepId === companySteps[0].id) {
+      setValidationSchema(companyValidationSchema);
+    } else {
+      setValidationSchema(contactPersonValidationSchema);
+    }
+  }, [activeStepId, companySteps]);
+
+  const handleStepClick = (event: React.BaseSyntheticEvent<MouseEvent>) => {
+    dispatch(setStepStateActive(event.target.id));
   };
 
   const gotToNextStep = () => {
     const currentStepIndex = companySteps.findIndex(
       (step) => step.stepState === StepStates.active
     );
-
     if (companySteps[currentStepIndex + 1].stepState === StepStates.disabled) {
       return;
     }
     dispatch(setStepStateActive(companySteps[currentStepIndex + 1].id));
   };
 
-  const getForm = ({
-    validateForm,
-    submitForm,
-    isValid,
-    handleBlur,
-  }: {
-    validateForm: () => Promise<FormikErrors<CompanyFormValues>>;
-    submitForm: () => void;
-    isValid: boolean;
-    handleBlur: (e: any) => void;
-  }) => {
-    switch (activeStepId) {
-      case "step1": {
-        setValidationSchema(companyValidationSchema);
-        return (
-          <Company
-            primaryButtonDisabled={!isValid}
-            handleBlur={handleBlur}
-            handleBackClick={handleBackClick}
-            handleNextClick={() => handleNextClick(validateForm)}
-          />
-        );
-      }
-      case "step2": {
-        setValidationSchema(contactPersonValidationSchema);
-        return (
-          <ContactPerson
-            handleBackClick={handleBackClick}
-            handleNextClick={() => handleNextClick(validateForm, submitForm)}
-          />
-        );
-      }
-
-      default:
-        return null;
-    }
-  };
-
-  const handleNextClick = (
+  const handleNextButtonClick = (
     validateForm: () => Promise<FormikErrors<CompanyFormValues>>,
     submitForm?: () => void
   ) => {
@@ -157,7 +98,7 @@ export function CompanyForm() {
     gotToNextStep();
   };
 
-  const handleBackClick = () => {
+  const handleBackButtonClick = () => {
     const currentStepIndex = companySteps.findIndex(
       (step) => step.stepState === StepStates.active
     );
@@ -167,9 +108,49 @@ export function CompanyForm() {
     dispatch(setStepStateActive(companySteps[currentStepIndex - 1].id));
   };
 
-  const onSubmit = (values: any) => {
-    console.log(values);
-    dispatch(companyAsync(2));
+  const onSubmit = (values: CompanyFormValues) => {
+    dispatch(companyAsync(values));
+  };
+
+  const getForm = ({
+    validateForm,
+    submitForm,
+    isValid,
+    handleBlur,
+  }: {
+    validateForm: () => Promise<FormikErrors<CompanyFormValues>>;
+    submitForm: () => void;
+    isValid: boolean;
+    handleBlur: (event: FocusEvent<Element>) => void;
+  }) => {
+    switch (activeStepId) {
+      case companySteps[0].id: {
+        return (
+          <Company
+            dataTestId={companyFormTestId}
+            primaryButtonDisabled={!isValid}
+            handleBlur={handleBlur}
+            handleSecondaryButtonClick={handleBackButtonClick}
+            handlePrimaryButtonClick={() => handleNextButtonClick(validateForm)}
+          />
+        );
+      }
+      case companySteps[1].id: {
+        return (
+          <ContactPerson
+            dataTestId={contactPersonFormTestId}
+            primaryButtonDisabled={!isValid}
+            handleSecondaryButtonClick={handleBackButtonClick}
+            handleBlur={handleBlur}
+            handlePrimaryButtonClick={() =>
+              handleNextButtonClick(validateForm, submitForm)
+            }
+          />
+        );
+      }
+      default:
+        return null;
+    }
   };
 
   return (
@@ -178,6 +159,7 @@ export function CompanyForm() {
         <div className={style.asideLeft}>
           <Text>Logo</Text>
           <Stepper
+            dataTestId={stepperTestId}
             steps={companySteps}
             handleStepClick={handleStepClick}
             stepCounter={`${companyStepCounter}%`}
@@ -186,11 +168,11 @@ export function CompanyForm() {
         <div className={style.content}>
           <div className={style.header}>
             <Text>Application</Text>
-            <Button title="Fill in later" margin="0 0" />
+            <TextButton title="Fill in Later" />
           </div>
           <Formik
             onSubmit={onSubmit}
-            initialValues={initialValues}
+            initialValues={companyData}
             validationSchema={validationSchema}
           >
             {({
@@ -210,6 +192,6 @@ export function CompanyForm() {
       </div>
     </div>
   );
-}
+};
 
 export default CompanyForm;

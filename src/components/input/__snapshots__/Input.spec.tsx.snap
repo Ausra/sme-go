@@ -95,6 +95,7 @@ exports[`Input styles renders with errors message 1`] = `
   font-size: 12px;
   color: #FF7064;
   pointer-events: none;
+  margin-bottom: 8px;
 }
 
 .c0 {

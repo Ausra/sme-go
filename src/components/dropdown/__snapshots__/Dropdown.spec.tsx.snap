@@ -41,6 +41,6 @@ exports[`Dropdown styles renders 1`] = `
   id="styled-input"
   placeholder=" "
   type="text"
-  value="Lithuania"
+  value=""
 />
 `;
