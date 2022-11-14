@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Styles should render 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c1 {
+  border: transparent;
+  margin-top: 16px;
+  margin-right: 16px;
+}
+
+.c2 {
+  font-size: 12px;
+}
+
+<div
+  class="c0"
+  data-testid="styled-checkbox-container"
+>
+  <input
+    class="c1"
+    data-testid="styled-checkbox-input"
+    id="checkbox1"
+    type="checkbox"
+  />
+  <label
+    class="c2"
+    for="checkbox1"
+  />
+</div>
+`;

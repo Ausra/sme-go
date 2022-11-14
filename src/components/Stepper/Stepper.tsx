@@ -1,11 +1,14 @@
 import { FunctionComponent } from "react";
 import styled from "styled-components/macro";
+import { defaultTheme } from "../../utils/global-styles";
 import Text from "../text";
-import Step from "./step/Step";
+import Step, { StepStates } from "./step";
 
 interface StepperProps {
   dataTestId?: string;
-  steps: { title: string }[];
+  steps: { title: string; id: string; stepState: StepStates }[];
+  handleStepClick: (e: any) => void;
+  stepCounter: string;
 }
 
 const defaultTestId = "stepper-container";
@@ -19,12 +22,33 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const Stepper: FunctionComponent<StepperProps> = ({ dataTestId, steps }) => {
+const CounterContainer = styled.div`
+  margin-left: 8px;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
+`;
+
+const Stepper: FunctionComponent<StepperProps> = ({
+  dataTestId,
+  steps,
+  handleStepClick,
+  stepCounter,
+}) => {
   return (
     <Container data-testid={dataTestId || defaultTestId}>
-      <Text>25%</Text>
+      <CounterContainer>
+        <Text color={defaultTheme.primaryColor}>{stepCounter}</Text>
+      </CounterContainer>
       {steps.map((step) => (
-        <Step title={step.title} key={step.title} />
+        <Step
+          title={step.title}
+          key={step.id}
+          id={step.id}
+          stepState={step.stepState}
+          disabled={step.stepState === StepStates.disabled}
+          handleStepClick={handleStepClick}
+        />
       ))}
     </Container>
   );

@@ -1,6 +1,7 @@
-export function fetchCompany(amount = 1) {
-  return new Promise<{ data: number }>((resolve) =>
-    setTimeout(() => resolve({ data: amount }), 500),
+import { CompanyFormValues } from "./CompanyForm";
+
+export function fetchCompany(values: CompanyFormValues) {
+  return new Promise<{ data: CompanyFormValues }>((resolve) =>
+    setTimeout(() => resolve({ data: values }), 500)
   );
 }
-

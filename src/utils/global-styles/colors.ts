@@ -4,7 +4,7 @@ export const blue = {
 };
 
 export const red = {
-  100: "##FF7064",
+  100: "#FF7064",
 };
 
 export const neutral = {
